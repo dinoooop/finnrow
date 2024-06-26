@@ -1,0 +1,10 @@
+import CategoryIndexScreen from "./admin/category/CategoryIndexScreen";
+import CategoryCreateScreen from "./admin/category/CategoryCreateScreen";
+import CategoryEditScreen from "./admin/category/CategoryEditScreen";
+
+<Route path='/admin/categories' element={<CategoryIndexScreen />} />
+<Route path='/admin/categories/create' element={<CategoryCreateScreen />} />
+<Route path='/admin/categories/:id' element={<CategoryEditScreen />} />
+
+
+app.use("/api/categories", categoryRoutes)

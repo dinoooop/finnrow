@@ -1,0 +1,7 @@
+import EntryIndexScreen from "./admin/entry/EntryIndexScreen";
+import EntryCreateScreen from "./admin/entry/EntryCreateScreen";
+import EntryEditScreen from "./admin/entry/EntryEditScreen";
+
+<Route path='/admin/entries' element={<EntryIndexScreen />} />
+<Route path='/admin/entries/create' element={<EntryCreateScreen />} />
+<Route path='/admin/entries/:id' element={<EntryEditScreen />} />

@@ -1,0 +1,10 @@
+import AccountIndexScreen from "./admin/account/AccountIndexScreen";
+import AccountCreateScreen from "./admin/account/AccountCreateScreen";
+import AccountEditScreen from "./admin/account/AccountEditScreen";
+
+<Route path='/admin/accounts' element={<AccountIndexScreen />} />
+<Route path='/admin/accounts/create' element={<AccountCreateScreen />} />
+<Route path='/admin/accounts/:id' element={<AccountEditScreen />} />
+
+
+app.use("/api/accounts", accountRoutes)

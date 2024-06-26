@@ -1,0 +1,32 @@
+- login, register, logout
+- index search 
+- sort data 
+- Project create, edit 
+- pagination 
+- grid
+- cancel button
+- Edit page
+- change to fillerSlabSlice.js not filler_slabSlice.js
+- redirect 
+- Profile page
+- Make login, register form same
+- mike profile page - this action is unautherised
+- empty security validation
+- move user profile to auth profile
+- account verification
+- send email
+- Loader for login, registration
+- resend
+- reset password
+- unique validation rule for auth
+- implement verification link
+- fix profile save error
+- remove verification code 
+- resend verification link
+- change reset_link to process_link
+- create NoAuthLayout
+- add roles in create, edit user form 
+- add status in create edit user form 
+- Home page design 
+- activate user from index page
+whenever update user update local storage
