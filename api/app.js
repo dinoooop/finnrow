@@ -8,6 +8,7 @@ import authRoutes from './src/routes/authRoutes.js';
 import entryRoutes from './src/routes/entryRoutes.js';
 import accountRoutes from './src/routes/accountRoutes.js';
 import categoryRoutes from './src/routes/categoryRoutes.js';
+import qnoteRoutes from './src/routes/qnoteRoutes.js';
 import awsServerlessExpressMiddleware from 'aws-serverless-express/middleware.js';
 
 dotenv.config();
@@ -33,5 +34,6 @@ app.use("/api/entries", entryRoutes)
 app.use("/api/accounts", accountRoutes)
 app.use("/api/categories", categoryRoutes)
 app.use("/api/select-auto", selectAutoRoutes)
+app.use("/api/qnotes", qnoteRoutes)
 
 export default app;

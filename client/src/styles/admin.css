@@ -1084,3 +1084,7 @@ i.help {
         background-size: 20% 50%, 20% 50%, 20% 50%
     }
 }
+
+.assign-qnote {
+    cursor: pointer;
+}

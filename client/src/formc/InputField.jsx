@@ -10,14 +10,7 @@ export default function ({ name, formValues, errors, onChangeForm, type = null, 
 
     let newType = ''
     if (type) {
-
-        if (type === "date") {
-            newType = 'date';
-            value = (value === "") ? bc.getDate() : value;
-        } else {
-            newType = type;
-        }
-
+        newType = type;
     } else {
         newType = (name === "email" || name === "password") ? name : "text"
     }

@@ -37,6 +37,10 @@ import CategoryIndexScreen from "./admin/category/CategoryIndexScreen";
 import CategoryCreateScreen from "./admin/category/CategoryCreateScreen";
 import CategoryEditScreen from "./admin/category/CategoryEditScreen";
 
+import QnoteIndexScreen from "./admin/qnote/QnoteIndexScreen";
+import QnoteCreateScreen from "./admin/qnote/QnoteCreateScreen";
+import QnoteEditScreen from "./admin/qnote/QnoteEditScreen";
+
 function App() {
   return (
     <>
@@ -74,6 +78,10 @@ function App() {
           <Route path='/admin/categories' element={<CategoryIndexScreen />} />
           <Route path='/admin/categories/create' element={<CategoryCreateScreen />} />
           <Route path='/admin/categories/:id' element={<CategoryEditScreen />} />
+
+          <Route path='/admin/qnotes' element={<QnoteIndexScreen />} />
+<Route path='/admin/qnotes/create' element={<QnoteCreateScreen />} />
+<Route path='/admin/qnotes/:id' element={<QnoteEditScreen />} />
           
         </Routes>
       </Router>
