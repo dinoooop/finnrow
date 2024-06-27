@@ -1,4 +1,5 @@
-import Account from '../models/account.js';
+import { st } from "./st.js";
+import Account from '../../models/account.js';
 
 export const auto = async (req, res) => {
     const { item } = req.params;
@@ -53,3 +54,12 @@ export const auto = async (req, res) => {
     }
 };
 
+
+export const regular = async (req, res) => {
+    const data = {
+        status: st.status(),
+        roles: st.roles(),
+        accounts: await st.accounts(),
+    }
+    res.json(data);
+}

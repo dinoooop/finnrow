@@ -32,7 +32,7 @@ export default function ({ name, formValues, endpoint, errors, onChangeForm, lab
 
     const fetchDefaultOptions = async () => {
         try {
-            const response = await axios.get(`${config.api}/select-auto/${endpoint}`)
+            const response = await axios.get(`${config.api}/st/auto/${endpoint}`)
             setOptions(response.data)
         } catch (error) {
             console.error('Error fetching data:', error)
@@ -41,7 +41,7 @@ export default function ({ name, formValues, endpoint, errors, onChangeForm, lab
 
     const fetchSelectedOption = async () => {
         try {
-            const response = await axios.post(`${config.api}/select-auto/${endpoint}`, { id: selected })
+            const response = await axios.post(`${config.api}/st/auto/${endpoint}`, { id: selected })
             setSelectedOption(response.data)
         } catch (error) {
             console.error('Error fetching data:', error)
@@ -54,7 +54,7 @@ export default function ({ name, formValues, endpoint, errors, onChangeForm, lab
 
     const onSearch = async (e) => {
         const search = e.target.value
-        const response = await axios.get(`${config.api}/select-auto/${endpoint}?search=${search}`)
+        const response = await axios.get(`${config.api}/st/auto/${endpoint}?search=${search}`)
         setOptions(response.data)
     }
 

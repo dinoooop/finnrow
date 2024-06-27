@@ -1,16 +1,16 @@
-import store from '../store'
+import processData from './processData'
 import { svs } from './svs'
 
 // server values
 export class sv {
 
   static role(needle = null) {
-    const data = store.getState().general.stock?.roles || []
+    const data = processData.roles || []
     return svs.getRetrun(needle, data)
   }
 
   static status(needle = null) {
-    const data = store.getState().general.stock?.status || []
+    const data = processData.status || []
     return svs.getRetrun(needle, data)
   }
 

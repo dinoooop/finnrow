@@ -35,7 +35,7 @@ const useAuthStore = create((set) => ({
         } catch (error) {
             set({
                 loading: false,
-                error: error.response.data.message ? error.response.data.message  : 'Server Error',
+                error: error.response.data.message ? error.response.data.message : 'Server Error',
                 success: '',
             });
             throw error;
@@ -52,7 +52,7 @@ const useAuthStore = create((set) => ({
             console.log(error.response);
             set({
                 loading: false,
-                error: error.response.data.message ? error.response.data.message  : 'Server Error',
+                error: error.response.data.message ? error.response.data.message : 'Server Error',
                 success: '',
             });
             throw error;
@@ -66,7 +66,7 @@ const useAuthStore = create((set) => ({
         } catch (error) {
             set({
                 loading: false,
-                error: error.response.data.message ? error.response.data.message  : 'Server Error',
+                error: error.response.data.message ? error.response.data.message : 'Server Error',
                 success: '',
             });
             throw error;
@@ -80,7 +80,7 @@ const useAuthStore = create((set) => ({
         } catch (error) {
             set({
                 loading: false,
-                error: error.response.data.message ? error.response.data.message  : 'Server Error',
+                error: error.response.data.message ? error.response.data.message : 'Server Error',
                 success: '',
             });
             throw error;
@@ -94,7 +94,7 @@ const useAuthStore = create((set) => ({
         } catch (error) {
             set({
                 loading: false,
-                error: error.response.data.message ? error.response.data.message  : 'Server Error',
+                error: error.response.data.message ? error.response.data.message : 'Server Error',
                 success: '',
             });
             throw error;
@@ -109,7 +109,7 @@ const useAuthStore = create((set) => ({
         } catch (error) {
             set({
                 loading: false,
-                error: error.response.data.message ? error.response.data.message  : 'Server Error',
+                error: error.response.data.message ? error.response.data.message : 'Server Error',
                 success: '',
             });
             throw error;

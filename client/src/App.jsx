@@ -80,9 +80,9 @@ function App() {
           <Route path='/admin/categories/:id' element={<CategoryEditScreen />} />
 
           <Route path='/admin/qnotes' element={<QnoteIndexScreen />} />
-<Route path='/admin/qnotes/create' element={<QnoteCreateScreen />} />
-<Route path='/admin/qnotes/:id' element={<QnoteEditScreen />} />
-          
+          <Route path='/admin/qnotes/create' element={<QnoteCreateScreen />} />
+          <Route path='/admin/qnotes/:id' element={<QnoteEditScreen />} />
+
         </Routes>
       </Router>
     </>

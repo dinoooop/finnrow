@@ -3,18 +3,13 @@ import { sv } from "../../helpers/sv";
 
 export default function (props) {
 
-
     const { item } = props;
     const [status, setStatus] = useState(item.status)
+
     const handleOnClick = () => {
-        setStatus(prevStatus => prevStatus === sv.status("active")
-            ? sv.status("inactive") : sv.status("active"))
+        setStatus(prevStatus => prevStatus === 'active' ? 'inactive' : 'active');
+        props.onClick(item._id, status);
     }
-
-    useEffect(() => {
-        props.onClick(item.id, status);
-    }, [status]);
-
 
     return (
         <>

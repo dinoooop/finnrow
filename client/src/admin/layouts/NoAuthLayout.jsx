@@ -1,28 +1,27 @@
 import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { check, reset } from '../auth/authSlice';
-import { getStock } from '../general/generalSlice';
 import { useNavigate } from 'react-router-dom';
+import useGeneralStore from '../general/useGeneralStore';
+import useAuthStore from '../auth/useAuthStore';
+
+import useStStore from '../../bootstrap/st/useStStore';
+import { st } from '../../bootstrap/st/st';
 
 // Authenticated user not allowed to visit this page
 export default function (props) {
 
-    const dispatch = useDispatch()
-    const { user } = useSelector(state => state.auth)
-    const { stock } = useSelector(state => state.general)
+    const { stData, getStock } = useStStore();
+    const { user } = useAuthStore();
     const navigate = useNavigate()
 
+
+    console.log(st.accounts("Home"));
+
     useEffect(() => {
-        dispatch(reset())
-
-        if(!stock) {
-            dispatch(getStock())
+        if (!stData) {
+            getStock()
         }
-
-        if (user) {
-            navigate('/admin/modules')
-        }
-    }, [dispatch, user])
+        if (user) { navigate('/admin/modules') }
+    }, [user])
 
     return (
         <div>

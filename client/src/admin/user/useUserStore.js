@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import axios from 'axios';
-import config from '../../config';  // Assuming you have a config file for API endpoints and headers
+import config from '../../config';
 
 const useUserStore = create((set) => ({
     items: [],
@@ -19,15 +19,16 @@ const useUserStore = create((set) => ({
                 params: data,
                 headers: config.header().headers,
             });
-            const payload = response.data;
-            set({
-                items: payload.data,
-                loading: false,
+            set({ 
+                loading: false, 
+                items: response.data.data, 
+                perPage: response.data.per_page, 
+                total: response.data.total 
             });
         } catch (error) {
             set({
                 loading: false,
-                error: error.response ? error.response.data.message : 'An error occurred',
+                error: error.response.data.message?? 'Server error',
                 success: '',
             });
         }
@@ -43,7 +44,7 @@ const useUserStore = create((set) => ({
         } catch (error) {
             set({
                 loading: false,
-                error: error.response ? error.response.data.message : 'An error occurred',
+                error: error.response.data.message?? 'Server error',
                 success: '',
             });
         }
@@ -59,7 +60,7 @@ const useUserStore = create((set) => ({
         } catch (error) {
             set({
                 loading: false,
-                error: error.response ? error.response.data.message : 'An error occurred',
+                error: error.response.data.message?? 'Server error',
                 success: '',
             });
             throw error;
@@ -76,7 +77,7 @@ const useUserStore = create((set) => ({
         } catch (error) {
             set({
                 loading: false,
-                error: error.response ? error.response.data.message : 'An error occurred',
+                error: error.response.data.message?? 'Server error',
                 success: '',
             });
         }
@@ -92,7 +93,7 @@ const useUserStore = create((set) => ({
         } catch (error) {
             set({
                 loading: false,
-                error: error.response ? error.response.data.message : 'An error occurred',
+                error: error.response.data.message?? 'Server error',
                 success: '',
             });
         }

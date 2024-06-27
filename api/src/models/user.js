@@ -12,7 +12,19 @@ const theSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    processLink: {
+        type: String,
+        required: false
+    },
+    role: {
+        type: String,
+        required: true
+    },
+    status: {
+        type: String,
+        required: true
+    },
 });
 
 const theModel = mongoose.model('User', theSchema);
