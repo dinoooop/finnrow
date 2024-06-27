@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from "react-router-dom";
-import { logout } from "../../admin/auth/authSlice";
+import useAuthStore from "../auth/useAuthStore";
 
 export default function () {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const {logout} = useAuthStore()
 
     const [view, setView] = useState(false);
 
@@ -21,13 +22,7 @@ export default function () {
     }
 
     const handleLogout = (e) => {
-        dispatch(logout())
-            .then(() => {
-                navigate('/login');
-            })
-            .catch((error) => {
-                console.error('Logout failed:', error);
-            });
+        logout()
     }
 
     window.__root = document.getElementById('root');

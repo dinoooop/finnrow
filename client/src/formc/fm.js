@@ -1,3 +1,4 @@
+import { st } from "../bootstrap/st/st";
 import { sv } from "../helpers/sv";
 
 // form helpers
@@ -13,11 +14,11 @@ export class fm {
 
     switch (optionType) {
       case "role":
-        return sv.role()
+        return st.roles()
       case "hobbies":
         return []
       case "status":
-        return sv.status()
+        return st.status()
       default:
         return []
     }

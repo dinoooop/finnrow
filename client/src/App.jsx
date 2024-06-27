@@ -15,7 +15,7 @@ import FlushScreen from "./admin/general/FlushScreen";
 
 import UserIndexScreen from "./admin/user/UserIndexScreen";
 import UserCreateScreen from "./admin/user/UserCreateScreen";
-// import UserEditScreen from "./admin/user/UserEditScreen";
+import UserEditScreen from "./admin/user/UserEditScreen";
 
 import AuthLoginScreen from "./admin/auth/AuthLoginScreen";
 import AuthRegisterScreen from "./admin/auth/AuthRegisterScreen";
@@ -62,7 +62,7 @@ function App() {
 
           <Route path='/admin/users' element={<UserIndexScreen />} />
           <Route path='/admin/users/create' element={<UserCreateScreen />} />
-          {/* <Route path='/admin/users/:id' element={<UserEditScreen />} /> */}
+          <Route path='/admin/users/:id' element={<UserEditScreen />} />
           <Route path='/admin/profile' element={<AuthProfileScreen />} />
           <Route path='/admin/security' element={<AuthSecurityScreen />} />
           <Route path='/verify/:id' element={<AuthVerifyScreen />} />

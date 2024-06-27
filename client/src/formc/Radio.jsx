@@ -17,10 +17,10 @@ export default function ({ name, formValues, errors, onChangeForm, optionType=nu
                 options.map(option => (
                     <label className='radio-control' key={option.key}>
                         <input type="radio"
-                            value={option.id}
+                            value={option._id}
                             name={name}
                             onChange={onChangeForm}
-                            checked={value == option.id || ''}
+                            checked={value == option._id || ''}
                         /> {option.name}
                     </label>
                 ))

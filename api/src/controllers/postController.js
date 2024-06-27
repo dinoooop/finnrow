@@ -29,8 +29,8 @@ export const show = async (req, res) => {
 export const store = async (req, res) => {
 
   const file = req.file;
-  const url = (file)? await bc.uploadToS3(file) : '';
-  
+  const url = (file) ? await bc.uploadToS3(file) : '';
+
   try {
     const newPost = new Post({
       title: req.body.title,
@@ -38,7 +38,7 @@ export const store = async (req, res) => {
       user: req.userId,
       cover: url
     });
-    
+
     const savedPost = await newPost.save();
     res.status(201).json(savedPost);
   } catch (error) {

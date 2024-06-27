@@ -17,12 +17,12 @@ export class sta {
 
     static roles() {
         const stDataLocal = stb.localData()
-        return stDataLocal ? stDataLocal.roles : []
+        return (stDataLocal && stDataLocal.roles) ? stDataLocal.roles : []
     }
 
     static accounts() {
         const stDataLocal = stb.localData()
-        return stDataLocal ? stDataLocal.accounts : []
+        return stDataLocal ? stDataLocal?.accounts : []
     }
 
 }

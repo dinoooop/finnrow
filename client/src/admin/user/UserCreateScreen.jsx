@@ -16,6 +16,7 @@ import Radio from '../../formc/Radio'
 import Submit from '../../formc/Submit'
 import MultiSelect from '../../formc/MultiSelect'
 import MultiSelectAuto from '../../formc/MultiSelectAuto'
+import { st } from '../../bootstrap/st/st'
 
 export default function () {
 
@@ -26,14 +27,9 @@ export default function () {
     const [formValues, setFormValues] = useState({
         name: "test 2",
         email: "test@mail.com",
-        roles: [sv.role("subscriber")],
         password: "welcome",
-        status: sv.status("active"),
-        avatar: '',
-        photo: '',
-        album: [],
-        previews: [],
-        country: [1, 2, 103]
+        role: 'user',
+        status: 'active',
     })
 
     useEffect(() => { reset() }, [reset])
@@ -72,14 +68,10 @@ export default function () {
                     <form onSubmit={handleSubmit}>
 
                         {error && <p className='red-alert'>{error}</p>}
-
-                        <MultiSelectAuto name="country" formValues={formValues} errors={errors} onChangeForm={onChangeForm} />
-                        <InputFileMulti name="album" formValues={formValues} errors={errors} onChangeForm={onChangeForm} />
-                        <InputFile name="photo" formValues={formValues} errors={errors} onChangeForm={onChangeForm} />
                         <InputField name="name" formValues={formValues} errors={errors} onChangeForm={onChangeForm} />
                         <InputField name="email" formValues={formValues} errors={errors} onChangeForm={onChangeForm} />
                         <InputField name="password" formValues={formValues} errors={errors} onChangeForm={onChangeForm} />
-                        <Checkbox name="role" formValues={formValues} errors={errors} onChangeForm={onChangeForm} />
+                        <Radio name="role" formValues={formValues} errors={errors} onChangeForm={onChangeForm} />
                         <Radio name="status" formValues={formValues} errors={errors} onChangeForm={onChangeForm} />
                         <Submit cto="/admin/users" />
 

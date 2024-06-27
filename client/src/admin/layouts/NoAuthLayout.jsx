@@ -13,9 +13,6 @@ export default function (props) {
     const { user } = useAuthStore();
     const navigate = useNavigate()
 
-
-    console.log(st.accounts("Home"));
-
     useEffect(() => {
         if (!stData) {
             getStock()

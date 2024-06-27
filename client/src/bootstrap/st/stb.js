@@ -4,9 +4,18 @@ export class stb {
         if (data && data[0] && data[0]['_id']) {
             return this.find(param, data)
         } else {
-            const newData = this.setKeyNameId(data)
-            return this.find(param, newData)
+            if (param) {
+                if (data && data.length > 0) {
+                    const newData = this.setKeyNameId(data)
+                    return this.find(param, newData)
+                } else {
+                    return null;
+                }
+            }
+
         }
+
+        return []
     }
 
     static setKeyNameId(data) {

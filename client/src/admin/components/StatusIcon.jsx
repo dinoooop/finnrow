@@ -6,23 +6,23 @@ export default function (props) {
     const { item } = props;
     const [status, setStatus] = useState(item.status)
 
-    const handleOnClick = () => {
-        setStatus(prevStatus => prevStatus === 'active' ? 'inactive' : 'active');
-        props.onClick(item._id, status);
+    const handleOnClick = (cst) => {
+        setStatus(cst);
+        props.onClick(item._id, cst);
     }
 
     return (
         <>
             {
-                status === sv.status("active")
+                status === 'active'
                     ?
                     <div className="tooltip">
-                        <i className={"fas fa-square-check icon"} onClick={handleOnClick}></i>
+                        <i className={"fas fa-square-check icon"} onClick={() => handleOnClick('suspended')}></i>
                         <div className="top">Change status<i></i></div>
                     </div>
                     :
                     <div className="tooltip">
-                        <i className={"fas fa-circle-xmark icon"} onClick={handleOnClick}></i>
+                        <i className={"fas fa-circle-xmark icon"} onClick={() => handleOnClick('active')}></i>
                         <div className="top">Change status<i></i></div>
                     </div>
             }

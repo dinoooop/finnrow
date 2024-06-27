@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken"
 import User from '../models/user.js';
-import { vr } from "../helpers/vr.js";
+import { vr } from "../bootstrap/vr/vr.js";
 
 export const auth = async (req, res, next) => {
     try {
@@ -22,6 +22,15 @@ export const genVal = async (req, res, next) => {
     if (val.allErrorsFalse) {
         next()
     } else {
-        res.status(401).json({ errors: val.updatedErrors });
+        res.status(401).json({ message: val.firstError });
+    }
+}
+
+export const valUserUpdate = async (req, res, next) => {
+    const val = vr.validate(req.body, 'valUserUpdate')
+    if (val.allErrorsFalse) {
+        next()
+    } else {
+        res.status(401).json({ message: val.firstError });
     }
 }

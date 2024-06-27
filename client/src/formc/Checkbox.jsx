@@ -17,10 +17,10 @@ export default function ({ name, formValues, errors, onChangeForm, optionType, l
                 options.map(option => (
                     <label className='checkbox-control' key={option.key}>
                         <input type="checkbox"
-                            value={option.id}
+                            value={option._id}
                             name={name}
                             onChange={onChangeForm}
-                            checked={values.includes(option.id)}
+                            checked={values.includes(option._id)}
                         /> {option.name}
                     </label>
                 ))

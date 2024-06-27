@@ -30,6 +30,7 @@ export default function () {
     const handleStatus = (id, status) => {
         const data = { id, status };
         update(data);
+        index();
     }
 
     const handleSearch = e => {
@@ -84,7 +85,7 @@ export default function () {
                                             <td>{item.email}</td>
                                             <td className='action'>
                                                 <AppIcon onClick={handleDelete} item={item} icon="trash" />
-                                                <AppIcon to={`/admin/users/${item.id}`} icon="edit" />
+                                                <AppIcon to={`/admin/users/${item._id}`} icon="edit" />
                                                 <StatusIcon onClick={handleStatus} item={item} />
                                             </td>
                                         </tr>
@@ -103,9 +104,6 @@ export default function () {
                     />
                 </div>
             </div>
-
         </ProtectedLayout>
-
-
     )
 }

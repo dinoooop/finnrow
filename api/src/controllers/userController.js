@@ -1,4 +1,6 @@
 import User from '../models/user.js';
+import bcrypt from "bcryptjs"
+
 
 export const index = async (req, res) => {
     try {
@@ -47,7 +49,7 @@ export const show = async (req, res) => {
     try {
         const userId = req.userId;
         const { id } = req.params;
-        const found = await User.findOne({ _id: id }).populate('user');
+        const found = await User.findOne({ _id: id });
 
         if (!found) {
             return res.status(404).json({ error: 'Not found' });
@@ -84,17 +86,41 @@ export const update = async (req, res) => {
 
     const { id } = req.params;
     try {
-        const updatedUser = await User.findByIdAndUpdate(id, {
-            name: req.body.name,
-            email: req.body.email,
-            password: req.body.password,
-            role: req.body.role,
-            status: req.body.status,
-        }, { new: true });
-        if (!updatedUser) {
-            return res.status(404).json({ error: 'Not found' });
+        const updateFields = {};
+        const allowedFields = ['name', 'email', 'password', 'role', 'status'];
+
+        for (let i = 0; i < allowedFields.length; i++) {
+            const field = allowedFields[i];
+            if (req.body[field] !== undefined) {
+                if (field === 'password') {
+                    if (req.body[field] === "") {
+                        // Skip empty password
+                    } else {
+                        const saltRounds = 10;
+                        try {
+                            const hashedPassword = await bcrypt.hash(req.body[field], saltRounds);
+                            updateFields[field] = hashedPassword;
+                        } catch (error) {
+                            console.error('Error hashing password:', error);
+                        }
+                    }
+                } else {
+                    updateFields[field] = req.body[field];
+                }
+
+            }
         }
-        res.json(updatedUser);
+
+        if (Object.keys(updateFields).length > 0) {
+            const updatedUser = await User.findByIdAndUpdate(id, updateFields, { new: true });
+
+            if (!updatedUser) {
+                return res.status(404).json({ error: 'User not found' });
+            }
+
+            res.json(updatedUser);
+        }
+
     } catch (error) {
         res.status(400).send(error.toString());
     }

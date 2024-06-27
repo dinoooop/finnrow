@@ -4,9 +4,22 @@ export class stb {
         if (data && data[0] && data[0]['_id']) {
             return this.find(param, data)
         } else {
-            const newData = this.setKeyNameId(data)
-            return this.find(param, newData)
+            if (param) {
+                if (data && data.length > 0) {
+                    const newData = this.setKeyNameId(data)
+                    return this.find(param, newData)
+                } else {
+                    return null;
+                }
+            }
+
+            if (data && data.length > 0) {
+                return this.setKeyNameId(data);
+            }
+
         }
+
+        return []
     }
 
     static setKeyNameId(data) {
@@ -25,9 +38,9 @@ export class stb {
             }
             return data[index].key;
         } else if (typeof param === 'string') {
-            const index = data.findIndex(item => item.key? item.key === param : item.name === param);
+            const index = data.findIndex(item => item.key ? item.key === param : item.name === param);
             if (index === -1) {
-                throw new Error("Index not found");
+                throw new Error("Index are not found");
             }
             return data[index]._id;
         } else {
@@ -35,5 +48,5 @@ export class stb {
         }
     }
 
-    
+
 }

@@ -9,7 +9,7 @@ const useUserStore = create((set) => ({
     total: 0,
     loading: false,
     success: '',
-    error: '',
+    error: false,
 
     // Async action to fetch user data
     index: async (data = {}) => {
