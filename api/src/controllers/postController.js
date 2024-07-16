@@ -1,9 +1,25 @@
 import { bc } from '../helpers/bc.js';
 import Post from '../models/post.js';
 
+// export const index = async (req, res) => {
+//   try {
+//     const posts = await Post.find();
+//     res.json(posts);
+//   } catch (error) {
+//     res.status(500).send(error.toString());
+//   }
+// };
+
 export const index = async (req, res) => {
   try {
-    const posts = await Post.find();
+    let query = {}; 
+    query = { user: req.userId }
+    if (req.query.search) {
+      query = { title: { $regex: new RegExp(req.query.search, 'i') } };
+    }
+
+    const posts = await Post.find(query);
+
     res.json(posts);
   } catch (error) {
     res.status(500).send(error.toString());

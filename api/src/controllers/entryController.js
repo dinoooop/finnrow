@@ -5,24 +5,46 @@ export const index = async (req, res) => {
   try {
     let query = Entry.find({ user: req.userId });
 
-
-
     if (req.query.search) {
 
       const searchTerm = req.query.search;
       const numberSearch = !isNaN(searchTerm) ? Number(searchTerm) : null;
 
-      query = query.or([
+      query.or([
         { note: new RegExp(searchTerm, 'i') },
         ...(numberSearch !== null ? [{ price: numberSearch }] : [])
       ]);
     }
 
+    if (req.query.account) {
+      query.and({ account: req.query.account });
+    }
+
+
+
+    if (req.query.year && req.query.month) {
+      const { start, end } = bc.getYMSE(req.query.year, req.query.month)
+      query.and({
+        date: {
+          $gte: start,
+          $lte: end
+        }
+      });
+    } else if (req.query.year) {
+      const { start, end } = bc.getYMSE(req.query.year)
+      query.and({
+        date: {
+          $gte: start,
+          $lte: end
+        }
+      });
+    }
+
     if (req.query.so && req.query.sb) {
       const sortOrder = req.query.so === 'desc' ? -1 : 1;
-      query = query.sort({ [req.query.sb]: sortOrder });
+      query.sort({ [req.query.sb]: sortOrder });
     } else {
-      query = query.sort({ date: -1 });
+      query.sort({ date: -1 });
     }
 
     const page = parseInt(req.query.page) || 1;

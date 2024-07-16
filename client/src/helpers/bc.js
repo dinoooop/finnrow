@@ -87,8 +87,15 @@ export class bc {
     return `${month} ${day}, ${year}`;
   }
 
+  static getYear() {
+    const date = new Date();
+    return date.getFullYear();
+  }
 
-
-
+  static getMonth() {
+    const date = new Date();
+    return date.getUTCMonth() + 1;
+  }
+  
 
 }

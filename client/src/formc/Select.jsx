@@ -1,6 +1,6 @@
 import { fm } from "./fm";
 
-export default function ({ name, formValues, errors, onChangeForm, optionType, label = null, id = null }) {
+export default function ({ name, formValues, errors, onChangeForm, optionType, showEmpty = true, label = null, id = null }) {
 
     const newId = id ?? name
     const newLabel = label ?? fm.getLabel(name)
@@ -9,6 +9,7 @@ export default function ({ name, formValues, errors, onChangeForm, optionType, l
 
     const newOptionType = optionType ?? name;
     const options = fm.getOptions(newOptionType);
+    
 
     return (
         <div className="form-group">
@@ -21,8 +22,12 @@ export default function ({ name, formValues, errors, onChangeForm, optionType, l
                 className="form-control"
             >
                 {
+                    showEmpty &&
+                    <option key="empty" value="">--select-</option>
+                }
+                {
                     options.map(mapitem => (
-                        <option key={mapitem.key} value={mapitem.key}>
+                        <option key={mapitem._id} value={mapitem._id}>
                             {mapitem.name}
                         </option>
                     ))

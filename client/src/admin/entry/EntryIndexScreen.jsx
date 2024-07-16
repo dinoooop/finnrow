@@ -7,11 +7,27 @@ import ProtectedLayout from '../layouts/ProtectedLayout'
 import StatusIcon from '../components/StatusIcon'
 import useEntryStore from './useEntryStore'
 import { bc } from '../../helpers/bc'
+import InputField from '../../formc/InputField'
+import Select from '../../formc/Select'
+import { vr } from '../../helpers/vr'
+import { validateForm } from './entryValidation';
+
 
 export default function () {
 
     const { items, index, remove, destroy, perPage, total } = useEntryStore()
-    const [formValues, setFormValues] = useState({ search: "", so: "", sb: "", page: 1 })
+    const [formValues, setFormValues] = useState({
+        search: "",
+        so: "",
+        sb: "",
+        page: 1,
+        year: bc.getYear(),
+        month: bc.getMonth()
+    })
+
+    const [showModal, setShowModal] = useState(false)
+    const [errors, setErrors] = useState({})
+
 
     useEffect(() => {
         const data = Object.fromEntries(
@@ -22,6 +38,7 @@ export default function () {
         index(data)
 
     }, [formValues])
+
 
     const handleDelete = (entry) => {
         remove(entry)
@@ -40,12 +57,19 @@ export default function () {
         setFormValues(prev => ({ ...prev, page: number }))
     }
 
+    const onChangeForm = (e) => {
+        const validated = vr.validate(e, validateForm, formValues)
+        setFormValues(prev => ({ ...prev, ...validated.formValues }))
+        setErrors(prev => ({ ...prev, ...validated.error }))
+    }
+
     return (
         <ProtectedLayout roles="admin">
             <div className="page-header">
                 <h1>Entries</h1>
                 <div className="other-actions">
                     <AppIcon to="create" icon="add" />
+                    <AppIcon icon="filter" onClick={() => setShowModal(true)} />
                     <div className="search">
                         <input type="text"
                             className="form-control input-field"
@@ -103,6 +127,26 @@ export default function () {
 
                 </div>
             </div>
+
+            {
+                showModal &&
+                <div className="modal">
+                    <div className="modal-close-screen" onClick={() => setShowModal(false)}></div>
+
+                    <div className="modal-content">
+
+                        <InputField name="year" type="number" formValues={formValues} errors={errors} onChangeForm={onChangeForm} />
+                        <Select name="month" optionType="months" formValues={formValues} errors={errors} onChangeForm={onChangeForm} />
+                        <Select name="account" optionType="accounts" formValues={formValues} errors={errors} onChangeForm={onChangeForm} />
+
+                        <button
+                            type="button"
+                            className="btn"
+                            onClick={() => setShowModal(false)}
+                        >Filter</button>
+                    </div>
+                </div>
+            }
 
         </ProtectedLayout>
 

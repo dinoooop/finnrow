@@ -1,4 +1,5 @@
 import { st } from "../bootstrap/st/st";
+import processData from "../helpers/processData";
 import { sv } from "../helpers/sv";
 
 // form helpers
@@ -15,10 +16,14 @@ export class fm {
     switch (optionType) {
       case "role":
         return st.roles()
+      case "accounts":
+        return st.accounts()
       case "hobbies":
         return []
       case "status":
         return st.status()
+      case "months":
+        return processData.months
       default:
         return []
     }
