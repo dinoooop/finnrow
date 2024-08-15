@@ -11,6 +11,7 @@ import InputField from '../../formc/InputField'
 import Select from '../../formc/Select'
 import { vr } from '../../helpers/vr'
 import { validateForm } from './entryValidation';
+import Filter from '../components/Filter'
 
 
 export default function () {
@@ -25,9 +26,7 @@ export default function () {
         month: bc.getMonth()
     })
 
-    const [showModal, setShowModal] = useState(false)
     const [errors, setErrors] = useState({})
-
 
     useEffect(() => {
         const data = Object.fromEntries(
@@ -69,7 +68,12 @@ export default function () {
                 <h1>Entries</h1>
                 <div className="other-actions">
                     <AppIcon to="create" icon="add" />
-                    <AppIcon icon="filter" onClick={() => setShowModal(true)} />
+                    <Filter
+                        filterType="entries"
+                        formValues={formValues}
+                        errors={errors}
+                        onChangeForm={onChangeForm}
+                    />
                     <div className="search">
                         <input type="text"
                             className="form-control input-field"
@@ -128,25 +132,7 @@ export default function () {
                 </div>
             </div>
 
-            {
-                showModal &&
-                <div className="modal">
-                    <div className="modal-close-screen" onClick={() => setShowModal(false)}></div>
 
-                    <div className="modal-content">
-
-                        <InputField name="year" type="number" formValues={formValues} errors={errors} onChangeForm={onChangeForm} />
-                        <Select name="month" optionType="months" formValues={formValues} errors={errors} onChangeForm={onChangeForm} />
-                        <Select name="account" optionType="accounts" formValues={formValues} errors={errors} onChangeForm={onChangeForm} />
-
-                        <button
-                            type="button"
-                            className="btn"
-                            onClick={() => setShowModal(false)}
-                        >Filter</button>
-                    </div>
-                </div>
-            }
 
         </ProtectedLayout>
 

@@ -3,6 +3,7 @@ import Entry from '../models/entry.js';
 
 export const index = async (req, res) => {
   try {
+
     let query = Entry.find({ user: req.userId });
 
     if (req.query.search) {
@@ -24,20 +25,10 @@ export const index = async (req, res) => {
 
     if (req.query.year && req.query.month) {
       const { start, end } = bc.getYMSE(req.query.year, req.query.month)
-      query.and({
-        date: {
-          $gte: start,
-          $lte: end
-        }
-      });
+      query.and({ date: { $gte: start, $lte: end } });
     } else if (req.query.year) {
       const { start, end } = bc.getYMSE(req.query.year)
-      query.and({
-        date: {
-          $gte: start,
-          $lte: end
-        }
-      });
+      query.and({ date: { $gte: start, $lte: end } });
     }
 
     if (req.query.so && req.query.sb) {
@@ -76,7 +67,7 @@ export const show = async (req, res) => {
   try {
     const userId = req.userId;
     const { id } = req.params;
-    const entry = await Entry.findOne({ _id: id }).populate('user')
+    const entry = await Entry.findOne({ _id: id }).populate('user').populate('account')
 
     if (!entry) {
       return res.status(404).json({ error: 'Not found' });
@@ -89,9 +80,7 @@ export const show = async (req, res) => {
 };
 
 export const store = async (req, res) => {
-
-  const file = req.file;
-
+  
   try {
     const newEntry = new Entry({
       date: req.body.date,
@@ -111,6 +100,7 @@ export const store = async (req, res) => {
 
 export const update = async (req, res) => {
   const { id } = req.params;
+  
   try {
     const updatedEntry = await Entry.findByIdAndUpdate(id, {
       date: req.body.date,

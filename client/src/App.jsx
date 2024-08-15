@@ -41,6 +41,12 @@ import QnoteIndexScreen from "./admin/qnote/QnoteIndexScreen";
 import QnoteCreateScreen from "./admin/qnote/QnoteCreateScreen";
 import QnoteEditScreen from "./admin/qnote/QnoteEditScreen";
 
+import ReportCreateScreen from "./admin/report/ReportCreateScreen";
+import ReportEditScreen from "./admin/report/ReportEditScreen";
+import AccountYearReport from "./admin/report/AccountYearReport";
+import AccountMonthReport from "./admin/report/AccountMonthReport";
+import AccountTillReport from "./admin/report/AccountTillReport";
+
 function App() {
   return (
     <>
@@ -82,6 +88,12 @@ function App() {
           <Route path='/admin/qnotes' element={<QnoteIndexScreen />} />
           <Route path='/admin/qnotes/create' element={<QnoteCreateScreen />} />
           <Route path='/admin/qnotes/:id' element={<QnoteEditScreen />} />
+
+          <Route path='/admin/account-year-report' element={<AccountYearReport />} />
+          <Route path='/admin/account-month-report' element={<AccountMonthReport />} />
+          <Route path='/admin/account-till-report' element={<AccountTillReport />} />
+          <Route path='/admin/reports/create' element={<ReportCreateScreen />} />
+          <Route path='/admin/reports/:id' element={<ReportEditScreen />} />
 
         </Routes>
       </Router>

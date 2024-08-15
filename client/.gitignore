@@ -2,6 +2,7 @@
 
 # dependencies
 /notes
+/remarks
 /node_modules
 /build
 /.pnp

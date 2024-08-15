@@ -28,7 +28,7 @@ export default function () {
     }
 
     const handleStatus = (id, status) => {
-        const data = { id, status };
+        const data = { _id: id, status };
         update(data);
         index();
     }

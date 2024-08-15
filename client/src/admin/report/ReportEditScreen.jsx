@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { validateForm } from './qnoteValidation';
+import { validateForm } from './reportValidation';
 import { vr } from '../../helpers/vr';
 import ProtectedLayout from '../layouts/ProtectedLayout';
 import { useRef } from 'react';
-import useQnoteStore from './useQnoteStore';
+import useReportStore from './useReportStore';
 import InputField from '../../formc/InputField';
 import Submit from '../../formc/Submit';
-import SingleSelectAuto from '../../formc/SingleSelectAuto';
 
 export default function () {
 
@@ -15,7 +14,7 @@ export default function () {
     const fileInputRef = useRef()
     const params = useParams()
 
-    const { show, item, update, error } = useQnoteStore()
+    const { show, item, update, error } = useReportStore()
     const [formValues, setFormValues] = useState({})
     const [errors, setErrors] = useState({})
 
@@ -26,8 +25,8 @@ export default function () {
     useEffect(() => {
         setFormValues({
             _id: item._id,
-            note: item.note,
-            account: item.account._id,
+            name: item.name,
+            description: item.description,
         })
     }, [item])
 
@@ -45,7 +44,7 @@ export default function () {
         } else {
             try {
                 const resultAction = await update(newFormData)
-                navigate('/admin/qnotes')
+                navigate('/admin/reports')
             } catch (error) {
                 console.error(error)
             }
@@ -57,7 +56,7 @@ export default function () {
 
         <ProtectedLayout roles="admin">
             <div className="page-header">
-                <h1>Edit Qnote</h1>
+                <h1>Edit Report</h1>
             </div>
 
             <div className="row">
@@ -66,9 +65,9 @@ export default function () {
 
                         {error && <p className='red-alert'>{error}</p>}
 
-                        <InputField name="note" formValues={formValues} errors={errors} onChangeForm={onChangeForm} />
-                        <SingleSelectAuto name="account" endpoint="accounts" formValues={formValues} errors={errors} onChangeForm={onChangeForm} />
-                        <Submit cto="/admin/qnotes" />
+                        <InputField name="name" formValues={formValues} errors={errors} onChangeForm={onChangeForm} />
+                        <InputField name="description" formValues={formValues} errors={errors} onChangeForm={onChangeForm} />
+                        <Submit cto="/admin/reports" />
 
                     </form>
                 </div>

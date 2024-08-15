@@ -11,6 +11,8 @@ import accountRoutes from './src/routes/accountRoutes.js';
 import categoryRoutes from './src/routes/categoryRoutes.js';
 import qnoteRoutes from './src/routes/qnoteRoutes.js';
 import userRoutes from './src/routes/userRoutes.js';
+import reportRoutes from './src/routes/reportRoutes.js';
+import testRoutes from './src/routes/testRoutes.js';
 
 dotenv.config();
 
@@ -37,5 +39,7 @@ app.use("/api/categories", categoryRoutes);
 app.use("/api/st", stRoutes);
 app.use("/api/qnotes", qnoteRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/reports", reportRoutes)
+app.use("/api/test", testRoutes)
 
 export default app;

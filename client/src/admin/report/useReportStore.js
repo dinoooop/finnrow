@@ -2,33 +2,26 @@ import { create } from 'zustand';
 import axios from 'axios';
 import config from '../../config';
 
-const useUserStore = create((set) => ({
+const useReportStore = create((set) => ({
     items: [],
     item: {},
     perPage: 0,
     total: 0,
     loading: false,
     success: '',
-    error: false,
-
-    // Async action to fetch user data
+    error: '',
     index: async (data = {}) => {
         set({ loading: true });
         try {
-            const response = await axios.get(`${config.api}/users`, {
+            const response = await axios.get(`${config.api}/reports`, {
                 params: data,
                 headers: config.header().headers,
             });
-            set({ 
-                loading: false, 
-                items: response.data.data, 
-                perPage: response.data.per_page, 
-                total: response.data.total 
-            });
+            set({ items: response.data.data, loading: false, perPage: response.data.per_page, total: response.data.total });
         } catch (error) {
             set({
                 loading: false,
-                error: error.response.data.message?? 'Server error',
+                error: error.response ? error.response.data.message : 'Server Error',
                 success: '',
             });
         }
@@ -36,7 +29,7 @@ const useUserStore = create((set) => ({
     show: async (id) => {
         set({ loading: true, success: '', error: '' });
         try {
-            const response = await axios.get(`${config.api}/users/${id}`, config.header());
+            const response = await axios.get(`${config.api}/reports/${id}`, config.header());
             set({
                 loading: false,
                 item: response.data,
@@ -44,7 +37,7 @@ const useUserStore = create((set) => ({
         } catch (error) {
             set({
                 loading: false,
-                error: error.response.data.message?? 'Server error',
+                error: error.response ? error.response.data.message : 'Server Error',
                 success: '',
             });
         }
@@ -52,7 +45,7 @@ const useUserStore = create((set) => ({
     store: async (data) => {
         set({ loading: true, success: '', error: '' });
         try {
-            const response = await axios.post(`${config.api}/users`, data, config.header())
+            const response = await axios.post(`${config.api}/reports`, data, config.header())
             set({
                 loading: false,
                 item: response.data,
@@ -60,40 +53,39 @@ const useUserStore = create((set) => ({
         } catch (error) {
             set({
                 loading: false,
-                error: error.response.data.message?? 'Server error',
+                error: error.response ? error.response.data.message : 'Server Error',
                 success: '',
             });
             throw error;
         }
     },
     update: async (data) => {
-        set({ loading: true, success: '', error: '' });
+        const id = (typeof data._id === 'undefined') ? data.get('_id') : data._id;
+
         try {
-            const response = await axios.put(`${config.api}/users/${data._id}`, data, config.header())
-            set({
-                loading: false,
-                item: response.data,
-            });
+            set({ loading: true, success: '', error: '' });
+            const response = await axios.put(`${config.api}/reports/${id}`, data, config.header())
+            set({ loading: false, item: response.data })
         } catch (error) {
             set({
                 loading: false,
-                error: error.response.data.message?? 'Server error',
+                error: error.response ? error.response.data.message : 'Server Error',
                 success: '',
             });
+            throw error;
         }
+
     },
     destroy: async (data) => {
+        console.log('data');
+        console.log(data);
         set({ loading: true, success: '', error: '' });
         try {
-            const response = await axios.delete(`${config.api}/users/${data._id}`, config.header())
-            set({
-                loading: false,
-                item: response.data,
-            });
+            const response = await axios.delete(`${config.api}/reports/${data._id}`, config.header())
         } catch (error) {
             set({
                 loading: false,
-                error: error.response.data.message?? 'Server error',
+                error: error.response ? error.response.data.message : 'Server Error',
                 success: '',
             });
         }
@@ -108,4 +100,4 @@ const useUserStore = create((set) => ({
     })
 }));
 
-export default useUserStore;
+export default useReportStore;

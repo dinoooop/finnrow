@@ -77,25 +77,38 @@ export class bc {
     return `${year}-${month}-${day}`;
   }
 
-  static displayDate(dateString = null) {
+  static displayDate(dateString = null, type) {
     const date = new Date(dateString);
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
     const month = months[date.getUTCMonth()];
     const day = date.getUTCDate();
     const year = date.getUTCFullYear();
 
+    if (type === 'month') {
+      return month;
+    }
+
     return `${month} ${day}, ${year}`;
   }
 
-  static getYear() {
-    const date = new Date();
-    return date.getFullYear();
+  // date can be 2024-06-24T00:00:00.000+00:00 or 2024-06-24
+  static getYear(date) {
+    const newDate = date ? new Date(date) : new Date();
+    return newDate.getFullYear();
   }
 
-  static getMonth() {
-    const date = new Date();
-    return date.getUTCMonth() + 1;
+  static getMonth(date) {
+    const newDate = date ? new Date(date) : new Date();
+    return newDate.getUTCMonth() + 1;
   }
-  
+
+  static skipNullData(data) {
+    return Object.fromEntries(
+      Object.entries(data)
+        .filter(([key, value]) => value !== "" && value !== null)
+        .map(([key, value]) => [key, value])
+    );
+  }
+
 
 }

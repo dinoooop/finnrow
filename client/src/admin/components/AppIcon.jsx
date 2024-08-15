@@ -2,11 +2,11 @@ import { Link } from "react-router-dom";
 
 export default function (props) {
 
-    const handleOnClick = () => {
+    const handleOnClick = (e) => {
         if (props.item) {
             props.onClick(props.item);
         } else {
-            props.onClick();
+            props.onClick(e);
         }
     }
 
